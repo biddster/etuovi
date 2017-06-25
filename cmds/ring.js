@@ -58,7 +58,7 @@ module.exports = {
                 l.info('###### RESULTS');
                 allHostsResults.forEach((hostResults) => {
                     hostResults.forEach((hostResult) => {
-                        l.info(hostResult.summary);
+                        l.info(`[${hostResult.host}] ${hostResult.scanner}: ${hostResult.summary}`);
                     });
                 });
             })
