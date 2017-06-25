@@ -20,7 +20,7 @@ const allHosts = _.map(config.hosts, (host) => {
             scanner: scannerName,
             time: startTime
         };
-        return scanners.locate(scannerName).scan(host.host, scannerConfig)
+        return scanners.get(scannerName).scan(host.host, scannerConfig)
             .then((report) => {
                 record.report = report;
                 return record;
