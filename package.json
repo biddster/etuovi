@@ -9,6 +9,30 @@
   "author": "biddster",
   "license": "MIT",
   "dependencies": {
-    "node-ssllabs": "^0.5.0"
+    "bluebird": "^3.5.0",
+    "change-case": "^3.0.1",
+    "evilscan": "^1.0.3",
+    "lodash": "^4.17.4",
+    "node-ssllabs": "^0.5.0",
+    "osmosis": "^1.1.2",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "urijs": "^1.18.10"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-biddster": "^0.3.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true,
+      "mocha": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "extends": "eslint-config-biddster/es6-node"
   }
 }
