@@ -6,6 +6,8 @@ const Promise = require('bluebird');
 const startTime = new Date().getTime();
 const errors = [];
 
+scanners.load();
+
 const config = JSON.parse(fs.readFileSync('example-config.json', 'utf8'));
 const allHosts = _.map(config.hosts, (host) => {
     console.log(`Scanning host [${host.host}]`);
@@ -16,7 +18,7 @@ const allHosts = _.map(config.hosts, (host) => {
             scanner: scannerName,
             time: startTime
         };
-        return scanners[scannerName](host.host, scannerConfig)
+        return scanners.locate(scannerName).scan(host.host, scannerConfig)
             .then((report) => {
                 record.report = report;
                 return record;
