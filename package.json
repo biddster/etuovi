@@ -17,7 +17,8 @@
     "osmosis": "^1.1.2",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
-    "urijs": "^1.18.10"
+    "urijs": "^1.18.10",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
