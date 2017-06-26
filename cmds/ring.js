@@ -2,8 +2,13 @@ const l = require('winston');
 
 const scanners = require('../lib/scanners');
 const fs = require('fs');
+const moment = require('moment');
 const _ = require('lodash');
 const Promise = require('bluebird');
+const mkdirp = require('mkdirp');
+
+const reportsDir = 'reports';
+mkdirp(reportsDir);
 
 module.exports = {
     command: 'ring [config]',
@@ -59,6 +64,8 @@ module.exports = {
                 allHostsResults.forEach((hostResults) => {
                     hostResults.forEach((hostResult) => {
                         l.info(`[${hostResult.host}] ${hostResult.scanner}: ${hostResult.summary}`);
+                        fs.writeFileSync(`${reportsDir}/${hostResult.host}__${hostResult.scanner}__${moment(startTime).format('YYYYMMDD__HHmmss')}.json`,
+                            JSON.stringify(hostResult, null, 4), 'utf8');
                     });
                 });
             })

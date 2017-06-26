@@ -1,17 +1,10 @@
 {
     "hosts": [{
-        "host": "griffintechnology.com",
+        "host": "www.johnlewis.com",
         "scanners": {
             "ssllabs": {},
             "port": {
-                "ports": "11-15,443"
-            }
-        }
-    }, {
-        "host": "10.1.1.61",
-        "scanners": {
-            "port": {
-                "ports": "21-30,443"
+                "ports": "80,443"
             }
         }
     }]
