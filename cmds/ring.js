@@ -63,7 +63,7 @@ module.exports = {
                 l.info('###### RESULTS');
                 allHostsResults.forEach((hostResults) => {
                     hostResults.forEach((hostResult) => {
-                        l.info(`[${hostResult.host}] ${hostResult.scanner}: ${hostResult.summary}`);
+                        l.info(`[${hostResult.host}] ${hostResult.scanner} => ${hostResult.summary}`);
                         fs.writeFileSync(`${reportsDir}/${hostResult.host}__${hostResult.scanner}__${moment(startTime).format('YYYYMMDD__HHmmss')}.json`,
                             JSON.stringify(hostResult, null, 4), 'utf8');
                     });
