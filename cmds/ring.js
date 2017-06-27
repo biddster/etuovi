@@ -1,5 +1,4 @@
 const l = require('winston');
-
 const scanners = require('../lib/scanners');
 const fs = require('fs');
 const moment = require('moment');
@@ -11,12 +10,11 @@ const reportsDir = 'reports';
 mkdirp(reportsDir);
 
 module.exports = {
-    command: 'ring [config]',
+    command: 'ring <config>',
     aliases: '',
     describe: '',
     builder: _.noop,
     handler: (argv) => {
-        l.level = _.get(argv, 'log-level', 'info');
         const startTime = new Date().getTime();
         const errors = [];
 
@@ -76,6 +74,10 @@ module.exports = {
             })
             .catch((err) => {
                 l.info(err);
+                errors.push(err);
+            })
+            .finally(() => {
+                process.exit(errors.length);
             });
     }
 };
