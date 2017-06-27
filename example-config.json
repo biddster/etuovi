@@ -3,9 +3,7 @@
         "host": "www.facebook.com",
         "scanners": {
             "ssllabs": {},
-            "port": {
-                "ports": "80,443"
-            },
+            "port": {},
             "securityheaders": {}
         }
     }]
