@@ -26,7 +26,7 @@ module.exports = {
         const allHosts = _.map(config.hosts, (host) => {
             l.info(`Scanning host [${host.host}]`);
             const hostScanners = _.map(host.scanners, (scannerConfig, scannerName) => {
-                l.info(`Running scanner [${scannerName}] against host [${host.host}]`);
+                l.info(`Running scanner [${scanners.formatName(scannerName)}] against host [${host.host}]`);
                 const record = {
                     host: host.host,
                     scanner: scannerName,
@@ -49,7 +49,7 @@ module.exports = {
                         });
                         return record;
                     }).finally(() => {
-                        l.info(`Finished scanner [${scannerName}] against host [${host.host}]`);
+                        l.info(`Finished scanner [${scanners.formatName(scannerName)}] against host [${host.host}]`);
                     });
             });
             return Promise.all(hostScanners).then((results) => {
@@ -65,7 +65,7 @@ module.exports = {
                 allHostsResults.forEach((hostResults) => {
                     l.info(`[${hostResults[0].host}]`);
                     hostResults.forEach((hostResult) => {
-                        l.info(`    ${hostResult.scanner} => ${hostResult.summary}`);
+                        l.info(`    ${scanners.formatName(hostResult.scanner)} => ${hostResult.summary}`);
                         const file = `${reportsDir}/${hostResult.host}__${hostResult.scanner}__${moment(startTime).format('YYYYMMDD__HHmmss')}.json`;
                         fs.writeFileSync(file, JSON.stringify(hostResult, null, 4), 'utf8');
                         files.push(file);
