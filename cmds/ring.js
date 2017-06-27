@@ -60,14 +60,19 @@ module.exports = {
 
         return Promise.all(allHosts)
             .then((allHostsResults) => {
-                l.info('###### RESULTS');
+                l.info('###### SUMMARY');
+                const files = [];
                 allHostsResults.forEach((hostResults) => {
+                    l.info(`[${hostResults[0].host}]`);
                     hostResults.forEach((hostResult) => {
-                        l.info(`[${hostResult.host}] ${hostResult.scanner} => ${hostResult.summary}`);
-                        fs.writeFileSync(`${reportsDir}/${hostResult.host}__${hostResult.scanner}__${moment(startTime).format('YYYYMMDD__HHmmss')}.json`,
-                            JSON.stringify(hostResult, null, 4), 'utf8');
+                        l.info(`    ${hostResult.scanner} => ${hostResult.summary}`);
+                        const file = `${reportsDir}/${hostResult.host}__${hostResult.scanner}__${moment(startTime).format('YYYYMMDD__HHmmss')}.json`;
+                        fs.writeFileSync(file, JSON.stringify(hostResult, null, 4), 'utf8');
+                        files.push(file);
                     });
                 });
+                l.info('###### REPORTS');
+                files.forEach(file => l.info(`${file}`));
             })
             .catch((err) => {
                 l.info(err);
