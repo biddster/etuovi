@@ -14,6 +14,7 @@
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",
     "moment": "^2.18.1",
+    "node-nmap": "^4.0.0",
     "node-ssllabs": "^0.5.0",
     "security-headers": "^0.2.0",
     "urijs": "^1.18.10",
@@ -22,7 +23,7 @@
   },
   "devDependencies": {
     "eslint": "^3.19.0",
-    "eslint-config-biddster": "^0.3.0"
+    "eslint-config-biddster": "^0.4.0"
   },
   "eslintConfig": {
     "env": {

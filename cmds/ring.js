@@ -38,7 +38,7 @@ module.exports = {
                     .catch((err) => {
                         errors.push(err);
                         _.assign(record, {
-                            summary: err.message,
+                            summary: _.isString(err) ? err : err.message,
                             detail: {
                                 message: err.message,
                                 fileName: err.fileName,
