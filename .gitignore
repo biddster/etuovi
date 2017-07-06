@@ -2,3 +2,5 @@
 .history
 .vscode
 node_modules
+reports
+etuovi-config*

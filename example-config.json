@@ -1,0 +1,9 @@
+{
+    "hosts": [{
+        "host": "www.facebook.com",
+        "scanners": {
+            "nmap": {},
+            "port": {}
+        }
+    }]
+}
