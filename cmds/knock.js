@@ -22,7 +22,7 @@ module.exports = {
 
         const config = JSON.parse(fs.readFileSync(argv.config, 'utf8'));
         const allHosts = _.map(config.hosts, (host) => {
-            l.info(`Scanning host [${host.host}]`);
+            l.info(`Knocking the front door of host [${host.host}]`);
             const hostScanners = _.map(host.scanners, (scannerConfig, scannerName) => {
                 l.info(`Running scanner [${scanners.formatName(scannerName)}] against host [${host.host}]`);
                 const record = {
@@ -64,7 +64,7 @@ module.exports = {
                     l.info(`[${hostResults[0].host}]`);
                     hostResults.forEach((hostResult) => {
                         l.info(`    ${scanners.formatName(hostResult.scanner)} => ${hostResult.summary}`);
-                        const file = `${reportsDir}/${hostResult.host}__${hostResult.scanner}__${moment(startTime).format('YYYYMMDD__HHmmss')}.json`;
+                        const file = `${reportsDir}/etuovi__${hostResult.host}__${hostResult.scanner}__${moment(startTime).format('YYYYMMDD__HHmmss')}.json`;
                         fs.writeFileSync(file, JSON.stringify(hostResult, null, 4), 'utf8');
                         files.push(file);
                     });
