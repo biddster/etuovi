@@ -7,12 +7,12 @@ const Promise = require('bluebird');
 const mkdirp = require('mkdirp');
 
 const reportsDir = 'reports';
-mkdirp(reportsDir);
+mkdirp.sync(reportsDir);
 
 module.exports = {
-    command: 'ring <config>',
+    command: 'knock <config>',
     aliases: '',
-    describe: '',
+    describe: 'asdf asdf asfa dfsadfd',
     builder: _.noop,
     handler: (argv) => {
         const startTime = new Date().getTime();
