@@ -61,9 +61,12 @@ module.exports = {
                 l.info('###### SUMMARY');
                 const files = [];
                 allHostsResults.forEach((hostResults) => {
-                    l.info(`[${hostResults[0].host}]`);
+                    l.info(`${hostResults[0].host}`);
                     hostResults.forEach((hostResult) => {
-                        l.info(`    ${scanners.formatName(hostResult.scanner)} => ${hostResult.summary}`);
+                        l.info(`    ${scanners.formatName(hostResult.scanner)}`);
+                        _.each(_.isArray(hostResult.summary) ? hostResult.summary : [hostResult.summary], (summary) => {
+                            l.info(`        ${summary}`);
+                        });
                         const file = `${reportsDir}/etuovi__${hostResult.host}__${hostResult.scanner}__${moment(startTime).format('YYYYMMDD__HHmmss')}.json`;
                         fs.writeFileSync(file, JSON.stringify(hostResult, null, 4), 'utf8');
                         files.push(file);
