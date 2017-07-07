@@ -24,7 +24,7 @@ module.exports = {
         const allHosts = _.map(config.hosts, (host) => {
             l.info(`Knocking the front door of host [${host.host}]`);
             const hostScanners = _.map(host.scanners, (scannerConfig, scannerName) => {
-                l.info(`Running scanner [${scanners.formatName(scannerName)}] against host [${host.host}]`);
+                l.info(`Running scanner [${scannerName}] against host [${host.host}]`);
                 const record = {
                     host: host.host,
                     scanner: scannerName,
@@ -47,7 +47,7 @@ module.exports = {
                         });
                         return record;
                     }).finally(() => {
-                        l.info(`Finished scanner [${scanners.formatName(scannerName)}] against host [${host.host}]`);
+                        l.info(`Finished scanner [${scannerName}] against host [${host.host}]`);
                     });
             });
             return Promise.all(hostScanners).then((results) => {
@@ -63,7 +63,7 @@ module.exports = {
                 allHostsResults.forEach((hostResults) => {
                     l.info(`${hostResults[0].host}`);
                     hostResults.forEach((hostResult) => {
-                        l.info(`    ${scanners.formatName(hostResult.scanner)}`);
+                        l.info(`    ${hostResult.scanner}`);
                         _.each(_.isArray(hostResult.summary) ? hostResult.summary : [hostResult.summary], (summary) => {
                             l.info(`        ${summary}`);
                         });
