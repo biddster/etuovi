@@ -10,7 +10,7 @@ const reportsDir = 'reports';
 mkdirp.sync(reportsDir);
 
 module.exports = {
-    command: 'knock <config>',
+    command: 'scan <config>',
     aliases: '',
     describe: 'asdf asdf asfa dfsadfd',
     builder: _.noop,
@@ -58,22 +58,24 @@ module.exports = {
 
         return Promise.all(allHosts)
             .then((allHostsResults) => {
-                l.info('###### SUMMARY');
-                const files = [];
+                const summaries = [];
+                const reports = [];
                 allHostsResults.forEach((hostResults) => {
-                    l.info(`${hostResults[0].host}`);
+                    summaries.push(`${hostResults[0].host}`);
                     hostResults.forEach((hostResult) => {
-                        l.info(`    ${hostResult.scanner}`);
+                        summaries.push(`    ${hostResult.scanner}`);
                         _.each(_.isArray(hostResult.summary) ? hostResult.summary : [hostResult.summary], (summary) => {
-                            l.info(`        ${summary}`);
+                            summaries.push(`        ${summary}`);
                         });
                         const file = `${reportsDir}/etuovi__${hostResult.host}__${hostResult.scanner}__${moment(startTime).format('YYYYMMDD__HHmmss')}.json`;
                         fs.writeFileSync(file, JSON.stringify(hostResult, null, 4), 'utf8');
-                        files.push(file);
+                        reports.push(file);
                     });
                 });
-                l.info('###### REPORTS');
-                files.forEach(file => l.info(`${file}`));
+                l.info('# SUMMARY');
+                summaries.forEach(line => l.info(line));
+                l.info('# REPORTS');
+                reports.forEach(line => l.info(line));
             })
             .catch((err) => {
                 l.info(err);
