@@ -5,7 +5,7 @@ const moment = require('moment');
 const _ = require('lodash');
 
 module.exports = {
-    command: 'make-config',
+    command: 'new-config',
     aliases: '',
     describe: 'Generates a new config file',
     builder: _.noop,
