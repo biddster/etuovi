@@ -1,28 +1,33 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Etuovi](#etuovi)
-  - [Getting Started](#getting-started)
-  - [Configuring Scanners](#configuring-scanners)
-    - [Nmap](#nmap)
-    - [Port](#port)
-    - [securityheaders.io](#securityheadersio)
-    - [SSL Labs](#ssl-labs)
-    - [Status codes](#status-codes)
-  - [Actually Running a scan using Etuovi](#actually-running-a-scan-using-etuovi)
-  - [Reporting](#reporting)
-  - [Logging](#logging)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # Etuovi
 
 Security scanner which probes the front door of your web applications.
 
-Why Etuovi? Well I wanted to call this front-door but that npm package already exists. And given the limited
+**Why Etuovi?** 
+
+I needed to scan some webapps at work using the usual suspects (nmap, ssllabs, securityheaders) and I figured a cmd line thingy to tie all those together would be pretty quick to write. And it was.
+
+**Why is it called Etuovi?**
+
+Well I wanted to call this front-door but that npm package already exists. And given the limited
 imagination I have, I just used Google Translate until I found a translation of front door that sounded cool. 
 Hence, Etuovi. Which Google reliably informs me is the Finnish for front door (if it's not, please tell me).
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Getting Started](#getting-started)
+- [Configuring Scanners](#configuring-scanners)
+  - [Nmap](#nmap)
+  - [Port](#port)
+  - [securityheaders.io](#securityheadersio)
+  - [SSL Labs](#ssl-labs)
+  - [Status codes](#status-codes)
+- [Actually Running a scan using Etuovi](#actually-running-a-scan-using-etuovi)
+- [Reporting](#reporting)
+- [Logging](#logging)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Getting Started
 
