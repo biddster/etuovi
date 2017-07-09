@@ -150,6 +150,10 @@ This scanner will inspect an array of paths, reporting on the http status codes 
 }
 ```
 
+## Actually Running a scan using Etuovi
+
+    $ etuovi scan etuovi-config-20170708-233728.json
+
 ## Reporting
 
 Each time you invoke Etuovi, the full detailed reports of the scans are written to the `reports` directory of the current working directory. The file name will look something like `etuovi__www.facebook.com__nmap__20170707__221954.json`
