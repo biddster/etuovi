@@ -1,3 +1,21 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Etuovi](#etuovi)
+  - [Getting Started](#getting-started)
+  - [Configuring Scanners](#configuring-scanners)
+    - [Nmap](#nmap)
+    - [Port](#port)
+    - [securityheaders.io](#securityheadersio)
+    - [SSL Labs](#ssl-labs)
+    - [Status codes](#status-codes)
+  - [Actually Running a scan using Etuovi](#actually-running-a-scan-using-etuovi)
+  - [Reporting](#reporting)
+  - [Logging](#logging)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Etuovi
 
 Security scanner which probes the front door of your web applications.
