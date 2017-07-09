@@ -3,6 +3,14 @@
   "version": "0.4.0",
   "description": "",
   "main": "index.js",
+  "keywords": [
+    "security",
+    "scanner",
+    "nmap",
+    "port",
+    "securityheaders.io",
+    "ssllabs"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

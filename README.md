@@ -81,7 +81,7 @@ The `options` property can be omitted and a default nmap port scan will be perfo
 
 This scanner uses the [Evilscan](https://github.com/eviltik/evilscan) module and is provided for situations where installing nmap is not possible.
 
-The `options` property can be omitted and a default the port scan will be performed for the top [1000 ports](http://www.nullsec.us/top-1-000-tcp-and-udp-ports-nmap-default/) as per nmap. 
+The `ports` property can be omitted and a default the port scan will be performed for the top [1000 ports](http://www.nullsec.us/top-1-000-tcp-and-udp-ports-nmap-default/) as per nmap. 
 
 ```
 ...
