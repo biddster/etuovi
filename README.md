@@ -95,14 +95,19 @@ The `ports` property can be omitted and a default the port scan will be performe
 
 ### securityheaders.io
 
-This scanner will perform a scan for security headers using securityheaders.io. 
+This scanner will perform a scan for security headers using securityheaders.io. It supports multiple paths under the host to handle the
+scenario where you have multiple web apps under a host.
 
-Note that this module is subject to change.
+The `paths` property can be omitted and a default of "/" will be used.
 
 ```
 ...
 "scanners": {
     "securityheaders": {
+        "paths": [
+            "/appA",
+            "/appB"
+        ]
         "expect": "A" 
     }
 }
@@ -112,10 +117,15 @@ Note that this module is subject to change.
 
 This scanner will check the SSL configuration using the Qualys SSL Labs API. Please go read the terms and conditions of the API usage.
 
+By default, the scan will use a `maxAge` of 23 hours and allow the results to come `fromCache`. Tweak the values below to your liking, or
+omit them if they suit. See here for more details. https://github.com/ssllabs/ssllabs-scan/blob/stable/ssllabs-api-docs.md
+
 ```
 ...
 "scanners": {
     "ssllabs": {
+        "fromCache": true,
+        "maxAge": 23
         "expect": "A" 
     }
 }
