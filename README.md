@@ -4,7 +4,7 @@ Security scanner which probes the front door of your web applications.
 
 **Why Etuovi?** 
 
-I needed to scan some webapps at work using the usual suspects (nmap, ssllabs, securityheaders) and I figured a cmd line thingy to tie all those together would be pretty quick to write. And it was.
+I needed to scan some webapps at work using the usual suspects (nmap, ssllabs, securityheaders) and I figured a cmd line thingy to tie all those together would be pretty quick to write. Hope it's useful to you too.
 
 **Why is it called Etuovi?**
 
