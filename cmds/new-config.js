@@ -15,9 +15,7 @@ module.exports = {
         const config = {
             hosts: [{
                 host: "www.example.com",
-                scanners: _.mapValues(scanners.load(), (scanner) => {
-                    return scanner.newConfig();
-                })
+                scanners: _.mapValues(scanners.load(), scanner => scanner.newConfig())
             }]
         };
 
