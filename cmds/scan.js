@@ -58,24 +58,26 @@ module.exports = {
 
         return Promise.all(allHosts)
             .then((allHostsResults) => {
-                const summaries = [];
-                const reports = [];
+                const masterReport = {
+                    hosts: [],
+                    reports: []
+                };
                 allHostsResults.forEach((hostResults) => {
-                    summaries.push(`${hostResults[0].host}`);
+                    const hostData = {
+                        host: hostResults[0].host,
+                        scanners: {}
+                    };
                     hostResults.forEach((hostResult) => {
-                        summaries.push(`    ${hostResult.scanner}`);
+                        hostData.scanners[hostResult.scanner] = [];
                         _.each(_.isArray(hostResult.summary) ? hostResult.summary : [hostResult.summary], (summary) => {
-                            summaries.push(`        ${summary}`);
+                            hostData.scanners[hostResult.scanner].push(summary);
                         });
-                        const file = `${reportsDir}/etuovi__${hostResult.host}__${hostResult.scanner}__${moment(startTime).format('YYYYMMDD__HHmmss')}.json`;
-                        fs.writeFileSync(file, JSON.stringify(hostResult, null, 4), 'utf8');
-                        reports.push(file);
+                        masterReport.reports.push(writeJsonReport(`${hostResult.host}__${hostResult.scanner}`, hostResult));
                     });
+                    masterReport.hosts.push(hostData);
                 });
-                l.info('# SUMMARY');
-                summaries.forEach(line => l.info(line));
-                l.info('# REPORTS');
-                reports.forEach(line => l.info(line));
+                const masterReportFile = writeJsonReport('scan__report', masterReport);
+                l.info(`Complete: ${masterReportFile}\n${JSON.stringify(masterReport, null, 4)}`);
             })
             .catch((err) => {
                 l.info(err);
@@ -84,5 +86,11 @@ module.exports = {
             .finally(() => {
                 process.exit(errors.length);
             });
+
+        function writeJsonReport(reportName, data) {
+            const file = `${reportsDir}/etuovi__${reportName}__${moment(startTime).format('YYYYMMDD__HHmmss')}.json`;
+            fs.writeFileSync(file, JSON.stringify(data, null, 4), 'utf8');
+            return file;
+        }
     }
 };
