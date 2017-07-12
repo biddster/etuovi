@@ -13,15 +13,14 @@ module.exports = {
         l.info('Making config');
 
         const config = {
-            "hosts": [{
-                "host": "www.example.com"
+            hosts: [{
+                host: "www.example.com",
+                scanners: _.mapValues(scanners.load(), (scanner) => {
+                    return scanner.newConfig();
+                })
             }]
         };
 
-        const s = scanners.load();
-        config.hosts[0].scanners = _.mapValues(s, (scanner) => {
-            return scanner.makeConfig();
-        });
         l.info(config);
         const file = `etuovi-config-${moment().format('YYYYMMDD-HHmmss')}.json`;
         fs.writeFileSync(file, JSON.stringify(config, null, 4), 'utf8');
