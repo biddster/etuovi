@@ -40,7 +40,8 @@
   },
   "devDependencies": {
     "eslint": "^3.19.0",
-    "eslint-config-biddster": "^0.4.0"
+    "eslint-config-biddster": "^0.4.0",
+    "mocha": "^3.4.2"
   },
   "eslintConfig": {
     "env": {
