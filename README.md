@@ -23,8 +23,10 @@ Hence, Etuovi. Which Google reliably informs me is the Finnish for front door (i
   - [securityheaders.io](#securityheadersio)
   - [SSL Labs](#ssl-labs)
   - [Status codes](#status-codes)
+- [Configuring Outputs](#configuring-outputs)
+  - [File output](#file-output)
+  - [Slack output](#slack-output)
 - [Actually Running a scan using Etuovi](#actually-running-a-scan-using-etuovi)
-- [Reporting](#reporting)
 - [Logging](#logging)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -74,7 +76,15 @@ You'll get a config file with a name like this `etuovi-config-20170708-233728.js
                 }
             }
         }
-    ]
+    ],
+    "outputs": {
+        "file": {
+            "reportsDir": "reports"
+        },
+        "slack": {
+            "slackWebhook": ""
+        }
+    }
 }
 ```
 
@@ -173,13 +183,40 @@ This scanner will inspect an array of paths, reporting on the http status codes 
 }
 ```
 
+## Configuring Outputs
+
+By default, Etuovi writes to the console. However, there are other outputs available when scanning.
+
+### File output
+
+```
+ "outputs": {
+        "file": {
+            "reportsDir": "reports"
+        }
+    }
+```
+
+If you enable the `file` output, the full detailed reports of the scans are written, by default, to the `reports` directory of the current working directory. The file name will look something like `etuovi__scan__report__20170707__221954.json`. To change the output directory, change the `reportsDir` property in the `file` output configuration.
+
+
+### Slack output
+
+Etuovi can post a message to slack containing the summaries of all the scans of all the hosts in your config file.
+
+```
+ "outputs": {
+        "slack": {
+            "slackWebhook": "https://hooks.slack.com/services/XXX/XXX"
+        }
+    }
+```
+
+
 ## Actually Running a scan using Etuovi
 
     $ etuovi scan etuovi-config-20170708-233728.json
 
-## Reporting
-
-Each time you invoke Etuovi, the full detailed reports of the scans are written to the `reports` directory of the current working directory. The file name will look something like `etuovi__www.facebook.com__nmap__20170707__221954.json`
 
 ## Logging
 
