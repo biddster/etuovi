@@ -191,10 +191,10 @@ By default, Etuovi writes to the console. However, there are other outputs avail
 
 ```json
  "outputs": {
-        "file": {
-            "reportsDir": "reports"
-        }
+    "file": {
+        "reportsDir": "reports"
     }
+}
 ```
 
 If you enable the `file` output, the full detailed reports of the scans are written, by default, to the `reports` directory of the current working directory. The file name will look something like `etuovi__scan__report__20170707__221954.json`. To change the output directory, change the `reportsDir` property in the `file` output configuration.
@@ -206,10 +206,10 @@ Etuovi can post a message to slack containing the summaries of all the scans of 
 
 ```json
  "outputs": {
-        "slack": {
-            "slackWebhook": "https://hooks.slack.com/services/XXX/XXX"
-        }
+    "slack": {
+        "slackWebhook": "https://hooks.slack.com/services/XXX/XXX"
     }
+}
 ```
 
 
