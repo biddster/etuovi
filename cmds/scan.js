@@ -1,13 +1,9 @@
 const l = require('winston');
-const scanners = require('../lib/scanners');
+const plugins = require('../lib/plugins');
 const fs = require('fs');
-const moment = require('moment');
 const _ = require('lodash');
 const Promise = require('bluebird');
-const mkdirp = require('mkdirp');
 
-const reportsDir = 'reports';
-mkdirp.sync(reportsDir);
 
 module.exports = {
     command: 'scan <config>',
@@ -18,19 +14,18 @@ module.exports = {
         const startTime = new Date().getTime();
         const errors = [];
 
-        scanners.load();
+        plugins.load();
 
         const config = JSON.parse(fs.readFileSync(argv.config, 'utf8'));
         const allHosts = _.map(config.hosts, (host) => {
-            l.info(`Knocking the front door of host [${host.host}]`);
+            l.info(`Scanning host [${host.host}]`);
             const hostScanners = _.map(host.scanners, (scannerConfig, scannerName) => {
                 l.info(`Running scanner [${scannerName}] against host [${host.host}]`);
                 const record = {
                     host: host.host,
-                    scanner: scannerName,
-                    time: startTime
+                    scanner: scannerName
                 };
-                return scanners.get(scannerName).scan(host.host, scannerConfig)
+                return plugins.getScanner(scannerName).scan(host.host, scannerConfig)
                     .then((report) => {
                         _.assign(record, report);
                         return record;
@@ -47,6 +42,7 @@ module.exports = {
                         });
                         return record;
                     }).finally(() => {
+                        record.time = new Date().getTime();
                         l.info(`Finished scanner [${scannerName}] against host [${host.host}]`);
                     });
             });
@@ -59,38 +55,35 @@ module.exports = {
         return Promise.all(allHosts)
             .then((allHostsResults) => {
                 const masterReport = {
-                    hosts: [],
-                    reports: []
+                    startTime,
+                    hosts: _.map(allHostsResults, (hostResults) => {
+                        return {
+                            host: hostResults[0].host,
+                            scanners: _.transform(hostResults, (scanners, hostResult) => {
+                                scanners[hostResult.scanner] = _.pick(hostResult, ['time', 'summary', 'detail']);
+                            }, {})
+                        };
+                    })
                 };
-                allHostsResults.forEach((hostResults) => {
-                    const hostData = {
-                        host: hostResults[0].host,
-                        scanners: {}
-                    };
-                    hostResults.forEach((hostResult) => {
-                        hostData.scanners[hostResult.scanner] = [];
-                        _.each(_.isArray(hostResult.summary) ? hostResult.summary : [hostResult.summary], (summary) => {
-                            hostData.scanners[hostResult.scanner].push(summary);
+                l.info(`=> RESULTS`);
+                masterReport.hosts.forEach((host) => {
+                    l.info(host.host);
+                    _.forEach(host.scanners, (report, name) => {
+                        l.info(`    ${name}`);
+                        report.summary.forEach(summary => {
+                            l.info(`       ${summary}`);
                         });
-                        masterReport.reports.push(writeJsonReport(`${hostResult.host}__${hostResult.scanner}`, hostResult));
                     });
-                    masterReport.hosts.push(hostData);
                 });
-                const masterReportFile = writeJsonReport('scan__report', masterReport);
-                l.info(`Complete: ${masterReportFile}\n${JSON.stringify(masterReport, null, 4)}`);
+                return Promise.all(_.map(config.outputs, (outputConfig, outputName) => plugins.getOutput(outputName).output(masterReport, outputConfig)));
             })
             .catch((err) => {
                 l.info(err);
                 errors.push(err);
             })
             .finally(() => {
+                l.info(`Scan complete with [${errors.length}] errors`);
                 process.exit(errors.length);
             });
-
-        function writeJsonReport(reportName, data) {
-            const file = `${reportsDir}/etuovi__${reportName}__${moment(startTime).format('YYYYMMDD__HHmmss')}.json`;
-            fs.writeFileSync(file, JSON.stringify(data, null, 4), 'utf8');
-            return file;
-        }
     }
 };

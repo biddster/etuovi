@@ -1,6 +1,6 @@
 {
   "name": "etuovi",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "",
   "main": "index.js",
   "keywords": [
@@ -39,8 +39,11 @@
     "yargs": "^8.0.2"
   },
   "devDependencies": {
+    "dotenv": "^4.0.0",
     "eslint": "^3.19.0",
-    "eslint-config-biddster": "^0.4.0"
+    "eslint-config-biddster": "^0.4.0",
+    "mocha": "^3.4.2",
+    "prettier": "^1.5.3"
   },
   "eslintConfig": {
     "env": {
@@ -53,5 +56,10 @@
       "sourceType": "module"
     },
     "extends": "eslint-config-biddster/es6-node"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 4,
+    "printWidth": 120
   }
 }

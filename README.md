@@ -23,8 +23,10 @@ Hence, Etuovi. Which Google reliably informs me is the Finnish for front door (i
   - [securityheaders.io](#securityheadersio)
   - [SSL Labs](#ssl-labs)
   - [Status codes](#status-codes)
+- [Configuring Outputs](#configuring-outputs)
+  - [File output](#file-output)
+  - [Slack output](#slack-output)
 - [Actually Running a scan using Etuovi](#actually-running-a-scan-using-etuovi)
-- [Reporting](#reporting)
 - [Logging](#logging)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -45,7 +47,7 @@ Now create a starter configuration file which we'll need to edit later:
 
 You'll get a config file with a name like this `etuovi-config-20170708-233728.json` with contents like this:
 
-```
+```json
 {
     "hosts": [
         {
@@ -74,7 +76,15 @@ You'll get a config file with a name like this `etuovi-config-20170708-233728.js
                 }
             }
         }
-    ]
+    ],
+    "outputs": {
+        "file": {
+            "reportsDir": "reports"
+        },
+        "slack": {
+            "slackWebhook": ""
+        }
+    }
 }
 ```
 
@@ -90,7 +100,7 @@ This scanner is a convenience wrapper around nmap. Consequently, in order for th
 
 The `options` property can be omitted and a default nmap port scan will be performed.
 
-```
+```json
 ...
 "scanners": {
     "nmap": {
@@ -106,7 +116,7 @@ This scanner uses the [Evilscan](https://github.com/eviltik/evilscan) module and
 
 The `ports` property can be omitted and a default the port scan will be performed for the top [1000 ports](http://www.nullsec.us/top-1-000-tcp-and-udp-ports-nmap-default/) as per nmap. 
 
-```
+```json
 ...
 "scanners": {
     "port": {
@@ -123,7 +133,7 @@ scenario where you have multiple web apps under a host.
 
 The `paths` property can be omitted and a default of "/" will be used.
 
-```
+```json
 ...
 "scanners": {
     "securityheaders": {
@@ -143,7 +153,7 @@ This scanner will check the SSL configuration using the Qualys SSL Labs API. Ple
 By default, the scan will use a `maxAge` of 23 hours and allow the results to come `fromCache`. Tweak the values below to your liking, or
 omit them if they suit. See here for more details. https://github.com/ssllabs/ssllabs-scan/blob/stable/ssllabs-api-docs.md
 
-```
+```json
 ...
 "scanners": {
     "ssllabs": {
@@ -158,7 +168,7 @@ omit them if they suit. See here for more details. https://github.com/ssllabs/ss
 
 This scanner will inspect an array of paths, reporting on the http status codes it encounters. You can use this to check that redirects are working etc.
 
-```
+```json
 ...
 "scanners": {
     "statuscodes": {
@@ -173,13 +183,40 @@ This scanner will inspect an array of paths, reporting on the http status codes 
 }
 ```
 
+## Configuring Outputs
+
+By default, Etuovi writes to the console. However, there are other outputs available when scanning.
+
+### File output
+
+```json
+ "outputs": {
+    "file": {
+        "reportsDir": "reports"
+    }
+}
+```
+
+If you enable the `file` output, the full detailed reports of the scans are written, by default, to the `reports` directory of the current working directory. The file name will look something like `etuovi__scan__report__20170707__221954.json`. To change the output directory, change the `reportsDir` property in the `file` output configuration.
+
+
+### Slack output
+
+Etuovi can post a message to slack containing the summaries of all the scans of all the hosts in your config file.
+
+```json
+ "outputs": {
+    "slack": {
+        "slackWebhook": "https://hooks.slack.com/services/XXX/XXX"
+    }
+}
+```
+
+
 ## Actually Running a scan using Etuovi
 
     $ etuovi scan etuovi-config-20170708-233728.json
 
-## Reporting
-
-Each time you invoke Etuovi, the full detailed reports of the scans are written to the `reports` directory of the current working directory. The file name will look something like `etuovi__www.facebook.com__nmap__20170707__221954.json`
 
 ## Logging
 
