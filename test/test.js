@@ -1,12 +1,15 @@
-require('dotenv').config()
+require('dotenv').config();
 
-const assert = require("assert");
-
-const masterReport = require("./etuovi__scan__report.json");
 
 describe("etuovi", function () {
-  describe("slack", function () {
-    it("should send a report to slack", function () {
+  describe("run as module", function () {
+    it("should scan using example config", function () {
+      return require("../index").scan('example-config.json');
+    });
+  });
+  describe("test outputs", function () {
+    it("should output a report to slack", function () {
+      const masterReport = require("./etuovi__scan__report.json");
       return require("../lib/outputs/slack").output(masterReport, {
         slackWebhook: process.env.SLACK_WEBHOOK
       });

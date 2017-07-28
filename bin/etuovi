@@ -1,3 +1,28 @@
 #!/usr/bin/env node
 
-require('../index.js');
+const program = require('commander');
+const pkg = require('../package.json');
+const index = require('../index');
+
+program
+    .version(pkg.version)
+    .option('-l, --log-level <level>', 'one of [error, warn, info, debug, verbose, silly]', index.logLevel);
+
+program
+    .command('scan <config>')
+    .description('Scans the hosts specified in the supplied config.')
+    .action(config => {
+        index.scan(config).then(errors => {
+            process.exit(errors.length);
+        });
+    });
+
+program
+    .command('new-config')
+    .description('Creates a new empty configuration file.')
+    .action(index.newConfig);
+
+
+program.parse(process.argv);
+
+if (!program.args.length) program.help();
