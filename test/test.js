@@ -2,6 +2,7 @@ require('dotenv').config();
 
 
 describe("etuovi", function () {
+  this.timeout(10000);
   describe("run as module", function () {
     it("should scan using example config", function () {
       const index = require("../index");
