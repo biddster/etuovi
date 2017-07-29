@@ -4,7 +4,9 @@ require('dotenv').config();
 describe("etuovi", function () {
   describe("run as module", function () {
     it("should scan using example config", function () {
-      return require("../index").scan('example-config.json');
+      const index = require("../index");
+      index.logLevel('warn');
+      return index.scan('example-config.json');
     });
   });
   describe("test outputs", function () {

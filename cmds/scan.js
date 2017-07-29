@@ -50,6 +50,7 @@ module.exports = (configFile) => {
     return Promise.all(allHosts)
         .then((allHostsResults) => {
             const masterReport = {
+                errors,
                 startTime,
                 hosts: _.map(allHostsResults, (hostResults) => {
                     return {
@@ -70,15 +71,10 @@ module.exports = (configFile) => {
                     });
                 });
             });
-            return Promise.all(_.map(config.outputs, (outputConfig, outputName) => plugins.getOutput(outputName).output(masterReport, outputConfig)));
-        })
-        .then(() => {
-            return errors;
-        })
-        .catch((err) => {
-            l.info(err);
-            errors.push(err);
-            return errors;
+            return Promise.all(_.map(config.outputs, (outputConfig, outputName) => plugins.getOutput(outputName).output(masterReport, outputConfig)))
+                .then(() => {
+                    return masterReport;
+                });
         })
         .finally(() => {
             l.info(`Scan complete with [${errors.length}] errors`);
