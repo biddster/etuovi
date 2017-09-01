@@ -22,6 +22,7 @@ Hence, Etuovi. Which Google reliably informs me is the Finnish for front door (i
   - [Port](#port)
   - [securityheaders.io](#securityheadersio)
   - [SSL Labs](#ssl-labs)
+  - [Headers](#headers)
   - [Status codes](#status-codes)
 - [Configuring Outputs](#configuring-outputs)
   - [File output](#file-output)
@@ -164,7 +165,7 @@ omit them if they suit. See here for more details. https://github.com/ssllabs/ss
 }
 ```
 
-## Headers
+### Headers
 
 This scanner will inspect an array of paths, reporting on the http status codes it encounters. You can use this to check that redirects are working etc. 
 It will also check for the presence of header values on the response. When checking for headers, the headers inspected are the amalgamation of the headers
