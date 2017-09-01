@@ -1,6 +1,6 @@
 {
   "name": "etuovi",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "",
   "main": "index.js",
   "keywords": [
@@ -9,10 +9,12 @@
     "nmap",
     "port",
     "securityheaders.io",
-    "ssllabs"
+    "ssllabs",
+    "headers"
   ],
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha test/**/*test.js --reporter spec"
+    "test": "./node_modules/mocha/bin/mocha test/**/*test.js --reporter spec",
+    "update-readme-toc": "doctoc ."
   },
   "bin": {
     "etuovi": "./bin/etuovi"
