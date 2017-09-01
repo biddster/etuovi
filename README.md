@@ -164,7 +164,38 @@ omit them if they suit. See here for more details. https://github.com/ssllabs/ss
 }
 ```
 
+## Headers
+
+This scanner will inspect an array of paths, reporting on the http status codes it encounters. You can use this to check that redirects are working etc. 
+It will also check for the presence of header values on the response. When checking for headers, the headers inspected are the amalgamation of the headers
+specified at the path level and the those specified at the root. I.e. the path and root headers are merged with the path headers overriding the root headers. 
+
+```json
+...
+"scanners": {
+    "headers": {
+        "headers": {
+            "X-Content-Type-Options": "nosniff",
+            "strict-transport-security": ".*"
+        },
+        "paths": [
+            {
+                "path": "/",
+                "method": "GET",
+                "headers": {
+                    "Content-Security-policy": ".*",
+                    "strict-transport-security": "max-age=\\d+; includeSubDomains"
+                },
+                "expect": 200
+            }
+        ]
+    }
+}
+```
+
 ### Status codes
+
+__Deprecated, use the headers scanner above__
 
 This scanner will inspect an array of paths, reporting on the http status codes it encounters. You can use this to check that redirects are working etc.
 
