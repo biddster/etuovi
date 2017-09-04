@@ -14,7 +14,8 @@
   ],
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha test/**/*test.js --reporter spec",
-    "update-readme-toc": "doctoc ."
+    "update-readme-toc": "doctoc .",
+    "format": "./node_modules/.bin/prettier --write '{bin,cmds,lib,test}/**/*.js' --write index.js"
   },
   "bin": {
     "etuovi": "./bin/etuovi"
@@ -46,7 +47,7 @@
     "eslint": "^3.19.0",
     "eslint-config-biddster": "^0.4.0",
     "mocha": "^3.4.2",
-    "prettier": "^1.5.3"
+    "prettier": "^1.6.1"
   },
   "eslintConfig": {
     "env": {
