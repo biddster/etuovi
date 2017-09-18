@@ -6,6 +6,6 @@ const requireAll = require('require-all');
 
 module.exports = requireAll(path.join(__dirname, 'cmds'));
 
-module.exports.logLevel = (logLevel) => {
+module.exports.logLevel = logLevel => {
     l.level = logLevel;
 };

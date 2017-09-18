@@ -9,10 +9,12 @@ module.exports = () => {
 
     const loaded = plugins.load();
     const config = {
-        hosts: [{
-            host: "www.example.com",
-            scanners: _.mapValues(loaded.scanners, plugin => plugin.newConfig())
-        }],
+        hosts: [
+            {
+                host: 'www.example.com',
+                scanners: _.mapValues(loaded.scanners, plugin => plugin.newConfig())
+            }
+        ],
         outputs: _.mapValues(loaded.outputs, output => output.newConfig())
     };
 
@@ -20,5 +22,4 @@ module.exports = () => {
     const file = `etuovi-config-${moment().format('YYYYMMDD-HHmmss')}.json`;
     fs.writeFileSync(file, JSON.stringify(config, null, 4), 'utf8');
     l.info(`Wrote config file [${file}]`);
-
 };

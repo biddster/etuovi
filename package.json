@@ -1,69 +1,71 @@
 {
-  "name": "etuovi",
-  "version": "0.9.1",
-  "description": "",
-  "main": "index.js",
-  "keywords": [
-    "security",
-    "scanner",
-    "nmap",
-    "port",
-    "securityheaders.io",
-    "ssllabs",
-    "headers"
-  ],
-  "scripts": {
-    "test": "./node_modules/mocha/bin/mocha test/**/*test.js --reporter spec",
-    "update-readme-toc": "doctoc .",
-    "format": "./node_modules/.bin/prettier --write '{bin,cmds,lib,test}/**/*.js' --write index.js"
-  },
-  "bin": {
-    "etuovi": "./bin/etuovi"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/biddster/etuovi.git"
-  },
-  "preferGlobal": true,
-  "author": "biddster",
-  "license": "MIT",
-  "dependencies": {
-    "bluebird": "^3.5.0",
-    "commander": "^2.11.0",
-    "evilscan": "^1.0.3",
-    "lodash": "^4.17.4",
-    "mkdirp": "^0.5.1",
-    "moment": "^2.18.1",
-    "node-nmap": "^4.0.0",
-    "node-ssllabs": "^0.5.0",
-    "request-promise": "^4.2.1",
-    "require-all": "^2.2.0",
-    "security-headers": "^0.2.0",
-    "urijs": "^1.18.10",
-    "winston": "^2.3.1"
-  },
-  "devDependencies": {
-    "dotenv": "^4.0.0",
-    "eslint": "^3.19.0",
-    "eslint-config-biddster": "^0.4.0",
-    "mocha": "^3.4.2",
-    "prettier": "^1.6.1"
-  },
-  "eslintConfig": {
-    "env": {
-      "es6": true,
-      "node": true,
-      "mocha": true
+    "name": "etuovi",
+    "version": "0.9.1",
+    "description": "",
+    "main": "index.js",
+    "keywords": [
+        "security",
+        "scanner",
+        "nmap",
+        "port",
+        "securityheaders.io",
+        "ssllabs",
+        "headers"
+    ],
+    "scripts": {
+        "test": "./node_modules/mocha/bin/mocha test/**/*test.js --reporter spec",
+        "update-readme-toc": "doctoc .",
+        "format":
+            "./node_modules/.bin/prettier --write '{bin,cmds,lib,test}/**/*.js' --write index.js"
     },
-    "parserOptions": {
-      "ecmaVersion": 6,
-      "sourceType": "module"
+    "bin": {
+        "etuovi": "./bin/etuovi"
     },
-    "extends": "eslint-config-biddster/es6-node"
-  },
-  "prettier": {
-    "singleQuote": true,
-    "tabWidth": 4,
-    "printWidth": 120
-  }
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/biddster/etuovi.git"
+    },
+    "preferGlobal": true,
+    "author": "biddster",
+    "license": "MIT",
+    "dependencies": {
+        "bluebird": "^3.5.0",
+        "commander": "^2.11.0",
+        "evilscan": "^1.0.3",
+        "lodash": "^4.17.4",
+        "mkdirp": "^0.5.1",
+        "moment": "^2.18.1",
+        "node-nmap": "^4.0.0",
+        "node-ssllabs": "^0.5.0",
+        "request-promise": "^4.2.1",
+        "require-all": "^2.2.0",
+        "security-headers": "^0.2.0",
+        "urijs": "^1.18.10",
+        "winston": "^2.3.1"
+    },
+    "devDependencies": {
+        "dotenv": "^4.0.0",
+        "eslint": "^3.19.0",
+        "eslint-config-biddster": "^0.4.0",
+        "eslint-config-prettier": "^2.4.0",
+        "mocha": "^3.4.2",
+        "prettier": "^1.7.0"
+    },
+    "eslintConfig": {
+        "env": {
+            "es6": true,
+            "node": true,
+            "mocha": true
+        },
+        "parserOptions": {
+            "ecmaVersion": 6,
+            "sourceType": "module"
+        },
+        "extends": ["eslint-config-biddster/es6-node", "prettier"]
+    },
+    "prettier": {
+        "singleQuote": true,
+        "tabWidth": 4,
+        "printWidth": 96
+    }
 }
