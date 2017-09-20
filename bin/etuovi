@@ -7,19 +7,26 @@ const index = require('../index');
 
 program
     .version(pkg.version)
-    .option('-l, --log-level <level>', 'one of [error, warn, info, debug, verbose, silly]', index.logLevel);
+    .option(
+        '-l, --log-level <level>',
+        'one of [error, warn, info, debug, verbose, silly]',
+        index.logLevel
+    );
 
 program
     .command('scan <config>')
     .description('Scans the hosts specified in the supplied config.')
     .action(config => {
-        index.scan(config).then(report => {
-            l.verbose(report);
-            process.exit(report.errors.length);
-        }).catch(err => {
-            l.error(err);
-            process.exit(999);
-        });
+        index
+            .scan(config)
+            .then(report => {
+                l.verbose(report);
+                process.exit(report.errors.length);
+            })
+            .catch(err => {
+                l.error(err);
+                process.exit(999);
+            });
     });
 
 program

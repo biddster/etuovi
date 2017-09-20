@@ -16,7 +16,7 @@
         "test": "./node_modules/mocha/bin/mocha test/**/*test.js --reporter spec",
         "update-readme-toc": "doctoc .",
         "format":
-            "./node_modules/.bin/prettier --write '{bin,cmds,lib,test}/**/*.js' --write index.js"
+            "./node_modules/.bin/prettier --write '{cmds,lib,test}/**/*.js' --write index.js --write bin/etuovi"
     },
     "bin": {
         "etuovi": "./bin/etuovi"
