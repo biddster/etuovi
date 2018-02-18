@@ -12,7 +12,7 @@ module.exports = {
                     reject(err);
                     return;
                 }
-                // Scan nmaps top 1000 ports - http://www.nullsec.us/top-1-000-tcp-and-udp-ports-nmap-default/
+                // Scan the nmap top 1000 ports - http://www.nullsec.us/top-1-000-tcp-and-udp-ports-nmap-default/
                 const options = _.assign(
                     {
                         target: ip,
