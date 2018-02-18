@@ -1,5 +1,6 @@
 require('dotenv').config();
 const assert = require('assert');
+const helper = require('./helper');
 
 describe('run as module', function() {
     this.timeout(60000);
@@ -7,24 +8,25 @@ describe('run as module', function() {
     it('should fail in the correct manner when using module which fails', function() {
         const index = require('../index');
         index.logLevel('debug');
-        const plugins = require('../plugins');
-        plugins.load();
-        plugins.addScanner('fail', require('./fixtures/failing-plugin.js'));
-        return index.scan('test/fixtures/failing-plugin-config.json').then(masterReport => {
+        helper.addScanner('fail', './fixtures/fail-scanner.js');
+        return index.scan('test/fixtures/fail-scanner-config.json').then(masterReport => {
             assert(masterReport.errors.length);
+            // TODO: assert the structure here
             assert.notStrictEqual(
                 masterReport.errors[0].indexOf('failed in the fail plugin'),
                 -1
             );
         });
     });
-    it('should scan using example config', function() {
+    it('should scan using success scanner config', function() {
         const index = require('../index');
         index.logLevel('warn');
-        return index.scan('example-config.json').then(masterReport => {
+        helper.addScanner('success', './fixtures/success-scanner.js');
+        return index.scan('test/fixtures/success-scanner-config.json').then(masterReport => {
             assert.strictEqual(masterReport.errors.length, 0);
             assert.notEqual(Number(masterReport.startTime), NaN);
             assert(masterReport.hosts);
+            // TODO: assert the structure here
             return masterReport;
         });
     });

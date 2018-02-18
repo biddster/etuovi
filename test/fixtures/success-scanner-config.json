@@ -1,0 +1,11 @@
+{
+    "hosts": [
+        {
+            "host": "myspace.com",
+            "scanners": {
+                "success": {}
+            }
+        }
+    ],
+    "outputs": {}
+}

@@ -11,5 +11,10 @@ module.exports = {
             .exists(testTmpDir)
             .then(exists => (exists ? fs.rmdirRecursive(testTmpDir) : null))
             .then(() => fs.mkdirRecursive(testTmpDir));
+    },
+    addScanner(scanner, impl) {
+        const plugins = require('../plugins');
+        plugins.load();
+        plugins.addScanner(scanner, require(impl));
     }
 };
