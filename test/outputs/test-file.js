@@ -12,7 +12,7 @@ describe('test outputs file', function() {
         report.startTime = 0;
         return require('../../lib/outputs/file')
             .output(report, {
-                reportsDir: helper.tmpDir
+                reportsDir: this.test.tmpDir
             })
             .then(file => {
                 const written = require(file);

@@ -1,16 +1,19 @@
 const path = require('path');
 const fs = require('final-fs');
 
-const tmpDir = path.join(process.cwd(), '.tmp');
+const tmpDir = path.join(process.cwd(), 'test/.tmp');
 
 module.exports = {
-    tmpDir,
     ensureCleanTmpDir() {
+        const testTmpDir = path.join(tmpDir, this.currentTest.title);
+        this.currentTest.tmpDir = testTmpDir;
         return fs
-            .exists(tmpDir)
-            .then(exists => (exists ? fs.rmdirRecursive(tmpDir) : null))
+            .exists(testTmpDir)
+            .then(exists => (exists ? fs.rmdirRecursive(testTmpDir) : null))
             .then(() => {
-                return fs.mkdirRecursive(tmpDir);
+                return fs.mkdirRecursive(testTmpDir).then(() => {
+                    return testTmpDir;
+                });
             });
     }
 };
