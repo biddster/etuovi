@@ -10,10 +10,6 @@ module.exports = {
         return fs
             .exists(testTmpDir)
             .then(exists => (exists ? fs.rmdirRecursive(testTmpDir) : null))
-            .then(() => {
-                return fs.mkdirRecursive(testTmpDir).then(() => {
-                    return testTmpDir;
-                });
-            });
+            .then(() => fs.mkdirRecursive(testTmpDir));
     }
 };
