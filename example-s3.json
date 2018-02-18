@@ -1,0 +1,15 @@
+{
+    "hosts": [
+        {
+            "host": "s3 example",
+            "scanners": {
+                "s3": {
+                    "credentialsProfile": "utf11"
+                }
+            }
+        }
+    ],
+    "outputs": {
+        "file": {}
+    }
+}

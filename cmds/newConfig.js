@@ -1,6 +1,6 @@
 const l = require('winston');
 const plugins = require('../lib/plugins');
-const fs = require('fs');
+const fs = require('final-fs');
 const moment = require('moment');
 const _ = require('lodash');
 
@@ -20,6 +20,8 @@ module.exports = () => {
 
     l.info(config);
     const file = `etuovi-config-${moment().format('YYYYMMDD-HHmmss')}.json`;
-    fs.writeFileSync(file, JSON.stringify(config, null, 4), 'utf8');
-    l.info(`Wrote config file [${file}]`);
+    return fs.writeJSON(file, config).then(() => {
+        l.info(`Wrote config file [${file}]`);
+        return file;
+    });
 };

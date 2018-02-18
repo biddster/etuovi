@@ -32,7 +32,7 @@ program
 program
     .command('new-config')
     .description('Creates a new empty configuration file.')
-    .action(index.newConfig);
+    .action(index.newconfig);
 
 program.parse(process.argv);
 

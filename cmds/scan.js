@@ -2,7 +2,7 @@ const l = require('winston');
 const plugins = require('../lib/plugins');
 const _ = require('lodash');
 const Promise = require('bluebird');
-const readFile = Promise.promisify(require('fs').readFile);
+const fs = require('final-fs');
 
 module.exports = configFile => {
     const startTime = new Date().getTime();
@@ -10,8 +10,7 @@ module.exports = configFile => {
 
     plugins.load();
 
-    return readFile(configFile, 'utf8').then(contents => {
-        const config = JSON.parse(contents);
+    return fs.readJSON(configFile).then(config => {
         const allHosts = _.map(config.hosts, host => {
             l.info(`Scanning host [${host.host}]`);
             const hostScanners = _.map(host.scanners, (scannerConfig, scannerName) => {
