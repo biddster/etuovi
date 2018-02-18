@@ -1,4 +1,5 @@
 const fs = require('final-fs');
+const Promise = require('bluebird');
 const moment = require('moment');
 const _ = require('lodash');
 
@@ -9,9 +10,11 @@ module.exports = {
             masterReport.startTime
         ).format('YYYYMMDD__HHmmss')}.json`;
 
-        return fs.mkdirRecursive(reportsDir).then(() => {
-            return fs.writeJSON(file, masterReport).then(() => file);
-        });
+        return Promise.resolve(
+            fs.mkdirRecursive(reportsDir).then(() => {
+                return fs.writeJSON(file, masterReport).then(() => file);
+            })
+        );
     },
     newConfig() {
         return {

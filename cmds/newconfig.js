@@ -2,6 +2,7 @@ const l = require('winston');
 const plugins = require('../plugins');
 const fs = require('final-fs');
 const moment = require('moment');
+const Promise = require('bluebird');
 const _ = require('lodash');
 
 module.exports = () => {
@@ -20,8 +21,10 @@ module.exports = () => {
 
     l.info(config);
     const file = `etuovi-config-${moment().format('YYYYMMDD-HHmmss')}.json`;
-    return fs.writeJSON(file, config).then(() => {
-        l.info(`Wrote config file [${file}]`);
-        return file;
-    });
+    return Promise.resolve(
+        fs.writeJSON(file, config).then(() => {
+            l.info(`Wrote config file [${file}]`);
+            return file;
+        })
+    );
 };
