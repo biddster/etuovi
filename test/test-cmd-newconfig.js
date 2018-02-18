@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const helper = require('./helper');
-const assert = require('assert');
 const path = require('path');
 const fs = require('final-fs');
 
