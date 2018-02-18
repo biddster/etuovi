@@ -6,5 +6,8 @@ module.exports = {
             summary: ['mock summary'],
             detail: ['mock detail']
         });
+    },
+    newConfig() {
+        return {};
     }
 };

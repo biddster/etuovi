@@ -18,12 +18,19 @@ module.exports = {
         return plugins;
     }),
     getScanner(scanner) {
-        return plugins.scanners[scanner];
+        const plugin = plugins.scanners[scanner];
+        if (!plugin) throw new Error(`No such scanner loaded [${scanner}]`);
+        return plugin;
     },
     getOutput(output) {
-        return plugins.outputs[output];
+        const plugin = plugins.outputs[output];
+        if (!plugin) throw new Error(`No such output loaded [${output}]`);
+        return plugin;
     },
     addScanner(scanner, impl) {
         plugins.scanners[scanner] = impl;
+    },
+    addOutput(output, impl) {
+        plugins.outputs[output] = impl;
     }
 };

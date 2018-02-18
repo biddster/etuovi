@@ -11,11 +11,11 @@ describe('test cmds newconfig', function() {
     it('should create a new json config file', function() {
         const newConfig = require('../cmds/newconfig');
         const cwd = process.cwd();
-        process.chdir(this.test.tmpDir);
+        process.chdir(this.test.$$tmpDir);
         return newConfig().then(file => {
             process.chdir(cwd);
             // TODO: check structure here, rather than just check it parses as json.
-            return fs.readJSON(path.join(this.test.tmpDir, file));
+            return fs.readJSON(path.join(this.test.$$tmpDir, file));
         });
     });
 });

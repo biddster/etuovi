@@ -1,8 +1,8 @@
 const Promise = require('bluebird');
 
 module.exports = {
-    scan() {
-        return Promise.reject(new Error('failed in the fail plugin'));
+    output() {
+        return Promise.resolve();
     },
     newConfig() {
         return {};

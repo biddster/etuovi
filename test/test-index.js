@@ -9,6 +9,7 @@ describe('run as module', function() {
         const index = require('../index');
         index.logLevel('debug');
         helper.addScanner('fail', './fixtures/fail-scanner.js');
+        helper.addOutput('devnull', './fixtures/devnull-output.js');
         return index.scan('test/fixtures/fail-scanner-config.json').then(masterReport => {
             assert(masterReport.errors.length);
             // TODO: assert the structure here
@@ -22,6 +23,7 @@ describe('run as module', function() {
         const index = require('../index');
         index.logLevel('warn');
         helper.addScanner('success', './fixtures/success-scanner.js');
+        helper.addOutput('devnull', './fixtures/devnull-output.js');
         return index.scan('test/fixtures/success-scanner-config.json').then(masterReport => {
             assert.strictEqual(masterReport.errors.length, 0);
             assert.notEqual(Number(masterReport.startTime), NaN);

@@ -6,7 +6,7 @@ const tmpDir = path.join(process.cwd(), 'test/.tmp');
 module.exports = {
     ensureCleanTestSpecificTmpDir() {
         const testTmpDir = path.join(tmpDir, this.currentTest.title);
-        this.currentTest.tmpDir = testTmpDir;
+        this.currentTest.$$tmpDir = testTmpDir;
         return fs
             .exists(testTmpDir)
             .then(exists => (exists ? fs.rmdirRecursive(testTmpDir) : null))
@@ -16,5 +16,10 @@ module.exports = {
         const plugins = require('../plugins');
         plugins.load();
         plugins.addScanner(scanner, require(impl));
+    },
+    addOutput(output, impl) {
+        const plugins = require('../plugins');
+        plugins.load();
+        plugins.addOutput(output, require(impl));
     }
 };

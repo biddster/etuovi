@@ -1,11 +1,13 @@
 {
     "hosts": [
         {
-            "host": "myspace.com",
+            "host": "example.com",
             "scanners": {
                 "success": {}
             }
         }
     ],
-    "outputs": {}
+    "outputs": {
+        "devnull": {}
+    }
 }
