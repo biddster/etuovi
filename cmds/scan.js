@@ -1,5 +1,5 @@
 const l = require('winston');
-const plugins = require('../lib/plugins');
+const plugins = require('../plugins');
 const _ = require('lodash');
 const Promise = require('bluebird');
 const fs = require('final-fs');

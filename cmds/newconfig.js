@@ -1,5 +1,5 @@
 const l = require('winston');
-const plugins = require('../lib/plugins');
+const plugins = require('../plugins');
 const fs = require('final-fs');
 const moment = require('moment');
 const _ = require('lodash');

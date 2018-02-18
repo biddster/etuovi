@@ -10,7 +10,7 @@ describe('test outputs file', function() {
 
     it('should output a json file', function() {
         report.startTime = 0;
-        return require('../../lib/outputs/file')
+        return require('../../plugins/outputs/file')
             .output(report, {
                 reportsDir: this.test.tmpDir
             })
