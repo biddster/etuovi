@@ -3,7 +3,7 @@ const assert = require('assert');
 const helper = require('./helper');
 
 describe('run as module', function() {
-    this.timeout(60000);
+    this.timeout(30000);
 
     it('should fail in the correct manner when using module which fails', function() {
         const index = require('../index');

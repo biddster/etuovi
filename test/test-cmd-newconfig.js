@@ -5,6 +5,8 @@ const path = require('path');
 const fs = require('final-fs');
 
 describe('test cmds newconfig', function() {
+    this.timeout(30000);
+
     beforeEach(helper.ensureCleanTestSpecificTmpDir);
 
     it('should create a new json config file', function() {
