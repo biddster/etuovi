@@ -8,7 +8,7 @@ const fs = require('final-fs');
 const report = require('../etuovi__scan__report.json');
 
 describe('test cmds newconfig', function() {
-    beforeEach(helper.ensureCleanTmpDir);
+    beforeEach(helper.ensureCleanTestSpecificTmpDir);
 
     it('should create a new json config file', function() {
         const newConfig = require('../../cmds/newconfig');
