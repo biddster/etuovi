@@ -25,6 +25,9 @@ module.exports = {
                 text: `Etuovi scan - ${new Date(masterReport.startTime).toISOString()}`,
                 attachments: message
             }
+        }).then(response => {
+            l.info('Wrote report to slack');
+            return response;
         });
     },
     newConfig() {
