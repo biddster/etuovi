@@ -3,6 +3,7 @@ const Promise = require('bluebird');
 const Evilscan = require('evilscan');
 const dns = require('dns');
 const _ = require('lodash');
+const portNumbers = require('port-numbers');
 
 module.exports = {
     scan(host, config) {
@@ -35,18 +36,26 @@ module.exports = {
                     })
                     .on('done', () => {
                         l.verbose(report);
+                        const ip = report[0].ip;
                         const openPorts = _(report)
                             .filter(['status', 'open'])
-                            .map('port')
-                            .sort((a, b) => a - b)
+                            .map(entry => {
+                                return {
+                                    port: entry.port,
+                                    protocol: 'tcp',
+                                    service: getServiceName(entry.port)
+                                };
+                            })
+                            .sort((a, b) => a.port - b.port)
                             .value();
+                        const ports = _.map(openPorts, 'port');
                         resolve({
                             summary: [
-                                `Found [${openPorts.length}] open ports [${openPorts.join(
+                                `Found [${ports.length}] open ports [${ports.join(
                                     ','
-                                )}]`
+                                )}] against [${ip}]`
                             ],
-                            detail: report
+                            detail: openPorts
                         });
                     });
                 scanner.run();
@@ -59,3 +68,8 @@ module.exports = {
         };
     }
 };
+
+function getServiceName(port) {
+    const service = portNumbers.getService(port);
+    return service ? service.name : 'unknown';
+}

@@ -28,7 +28,7 @@ module.exports = {
                     ).toUTCString()}]
                     Protocols [${protocols}]`
                 ],
-                detail: report,
+                detail: [report],
                 alert: config.expect ? config.expect === report.endpoints[0].grade : false
             };
         });
