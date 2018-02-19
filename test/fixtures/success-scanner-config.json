@@ -1,0 +1,13 @@
+{
+    "hosts": [
+        {
+            "host": "example.com",
+            "scanners": {
+                "success": {}
+            }
+        }
+    ],
+    "outputs": {
+        "devnull": {}
+    }
+}

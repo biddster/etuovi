@@ -4,7 +4,7 @@ const _ = require('lodash');
 
 module.exports = {
     output(masterReport, config) {
-        const message = _.map(masterReport.hosts, (host) => {
+        const message = _.map(masterReport.hosts, host => {
             return {
                 title: host.host,
                 fields: _.map(host.scanners, (scannerReport, scannerName) => {

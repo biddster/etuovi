@@ -1,22 +1,27 @@
 {
-    "hosts": [{
-        "host": "www.facebook.com",
-        "scanners": {
-            "nmap": {},
-            "port": {},
-            "statuscodes": {
-                "paths": [{
-                    "path": "/",
-                    "method": "GET",
-                    "expect": 200
-                }, {
-                    "path": "/groups",
-                    "method": "GET",
-                    "expect": 200
-                }]
+    "hosts": [
+        {
+            "host": "myspace.com",
+            "scanners": {
+                "nmap": {},
+                "port": {},
+                "statuscodes": {
+                    "paths": [
+                        {
+                            "path": "/",
+                            "method": "GET",
+                            "expect": 200
+                        },
+                        {
+                            "path": "/groups",
+                            "method": "GET",
+                            "expect": 200
+                        }
+                    ]
+                }
             }
         }
-    }],
+    ],
     "outputs": {
         "file": {}
     }
