@@ -3,7 +3,7 @@ require('dotenv').config();
 const assert = require('assert');
 const port = require('../plugins/scanners/port');
 
-describe('test scanner nmap', function() {
+describe('test scanner port', function() {
     this.timeout(5 * 60000);
 
     it('should scan ports', function() {

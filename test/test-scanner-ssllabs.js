@@ -4,7 +4,7 @@ const assert = require('assert');
 const ssllabs = require('../plugins/scanners/ssllabs');
 
 describe('test scanner ssllabs', function() {
-    this.timeout(5 * 60000);
+    this.timeout(10 * 60000);
 
     it('should get a report from ssllabs', function() {
         return ssllabs.scan('myspace.com', ssllabs.newConfig()).then(report => {
