@@ -1,12 +1,12 @@
 require('dotenv').config();
 const assert = require('assert');
 const helper = require('./helper');
+const index = require('../index');
 
 describe('run as module', function() {
     this.timeout(30000);
 
     it('should fail in the correct manner when using module which fails', function() {
-        const index = require('../index');
         index.logLevel('debug');
         helper.addScanner('fail', './fixtures/fail-scanner.js');
         helper.addOutput('devnull', './fixtures/devnull-output.js');
@@ -20,7 +20,6 @@ describe('run as module', function() {
         });
     });
     it('should scan using success scanner config', function() {
-        const index = require('../index');
         index.logLevel('warn');
         helper.addScanner('success', './fixtures/success-scanner.js');
         helper.addOutput('devnull', './fixtures/devnull-output.js');

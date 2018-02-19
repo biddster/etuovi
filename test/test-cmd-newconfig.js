@@ -4,7 +4,7 @@ const helper = require('./helper');
 const path = require('path');
 const fs = require('final-fs');
 
-describe('test cmds newconfig', function() {
+describe('test cmd newconfig', function() {
     this.timeout(30000);
 
     beforeEach(helper.ensureCleanTestSpecificTmpDir);

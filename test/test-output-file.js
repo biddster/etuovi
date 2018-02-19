@@ -5,7 +5,7 @@ const assert = require('assert');
 
 const report = require('./fixtures/etuovi__scan__report.json');
 
-describe('test outputs file', function() {
+describe('test output file', function() {
     this.timeout(30000);
 
     beforeEach(helper.ensureCleanTestSpecificTmpDir);

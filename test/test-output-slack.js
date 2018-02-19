@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const report = require('./fixtures/etuovi__scan__report.json');
 
-describe('test outputs slack', function() {
+describe('test output slack', function() {
     this.timeout(30000);
 
     it('should output a report to slack', function() {
