@@ -23,11 +23,12 @@ module.exports = {
                 .join(',');
             return {
                 summary: [
-                    `Grade [${report.endpoints[0].grade}] Cert expires 
-                    [${new Date(report.endpoints[0].details.cert.notAfter).toUTCString()}]
+                    `Grade [${report.endpoints[0].grade}] Cert expires [${new Date(
+                        report.endpoints[0].details.cert.notAfter
+                    ).toUTCString()}]
                     Protocols [${protocols}]`
                 ],
-                detail: report,
+                detail: [report],
                 alert: config.expect ? config.expect === report.endpoints[0].grade : false
             };
         });

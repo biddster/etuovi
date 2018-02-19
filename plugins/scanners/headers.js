@@ -1,6 +1,5 @@
 const l = require('winston');
 const Promise = require('bluebird');
-const nmap = require('node-nmap');
 const _ = require('lodash');
 const URI = require('urijs');
 const rp = require('request-promise');
@@ -23,7 +22,9 @@ module.exports = {
             return rp(options).then(response => {
                 l.verbose(response);
                 const summary = [
-                    `${options.method} [${options.uri}] actual [${response.statusCode}] expected [${spec.expect}]`
+                    `${options.method} [${options.uri}] actual [${
+                        response.statusCode
+                    }] expected [${spec.expect}]`
                 ];
                 const headers = _.assign(
                     {},
@@ -38,11 +39,15 @@ module.exports = {
                         );
                     } else if (!headerValue.match(new RegExp(headerValueRegex, 'i'))) {
                         summary.push(
-                            `${options.method} [${options.uri}] header [${headerName}] invalid value [${headerValue}]`
+                            `${options.method} [${
+                                options.uri
+                            }] header [${headerName}] invalid value [${headerValue}]`
                         );
                     } else {
                         summary.push(
-                            `${options.method} [${options.uri}] header [${headerName}] valid value [${headerValue}]`
+                            `${options.method} [${
+                                options.uri
+                            }] header [${headerName}] valid value [${headerValue}]`
                         );
                     }
                 });

@@ -16,9 +16,11 @@ module.exports = {
                     .value();
                 resolve({
                     summary: [
-                        `Found [${openPorts.length}] open ports [${openPorts.join(',')}]`
+                        `Found [${openPorts.length}] open ports [${openPorts.join(
+                            ','
+                        )}] against [${report[0].ip}]`
                     ],
-                    detail: report[0]
+                    detail: report[0].openPorts
                 });
             });
             osandports.on('error', err1 => {

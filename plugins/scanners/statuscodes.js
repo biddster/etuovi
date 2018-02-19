@@ -1,6 +1,5 @@
 const l = require('winston');
 const Promise = require('bluebird');
-const nmap = require('node-nmap');
 const _ = require('lodash');
 const URI = require('urijs');
 const rp = require('request-promise');
@@ -26,7 +25,9 @@ module.exports = {
                     delete resp.body;
                 }
                 return {
-                    summary: `${options.method} [${options.uri}] actual [${response.statusCode}] expected [${spec.expect}]`,
+                    summary: `${options.method} [${options.uri}] actual [${
+                        response.statusCode
+                    }] expected [${spec.expect}]`,
                     detail: resp
                 };
             });

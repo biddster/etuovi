@@ -13,9 +13,11 @@
         "headers"
     ],
     "scripts": {
-        "test": "./node_modules/mocha/bin/mocha test/**/*test.js --reporter spec",
+        "test":
+            "nyc --reporter=html ./node_modules/mocha/bin/mocha test --recursive --reporter spec",
         "update-readme-toc": "doctoc .",
-        "format": "./node_modules/.bin/prettier --write '{cmds,lib,test}/**/*.js' --write index.js --write bin/etuovi"
+        "format":
+            "./node_modules/.bin/prettier --write '{cmds,lib,test}/**/*.js' --write index.js --write bin/etuovi"
     },
     "bin": {
         "etuovi": "./bin/etuovi"
@@ -29,27 +31,28 @@
     "license": "MIT",
     "dependencies": {
         "bluebird": "^3.5.0",
-        "commander": "^2.13.0",
-        "eslint-config-prettier": "^2.9.0",
-        "evilscan": "^1.1.0",
-        "lodash": "^4.17.4",
-        "mkdirp": "^0.5.1",
+        "commander": "^2.14.1",
+        "evilscan": "^1.6.1",
+        "final-fs": "^1.6.1",
+        "lodash": "^4.17.5",
         "moment": "^2.20.1",
         "node-nmap": "^4.0.0",
         "node-ssllabs": "^0.5.0",
+        "port-numbers": "^2.0.22",
         "prettier": "^1.10.2",
         "request-promise": "^4.2.1",
         "require-all": "^2.2.0",
         "security-headers": "^0.2.0",
-        "urijs": "^1.18.10",
+        "urijs": "^1.19.1",
         "winston": "^2.3.1"
     },
     "devDependencies": {
         "dotenv": "^5.0.0",
-        "eslint": "^4.16.0",
-        "eslint-config-biddster": "^0.4.0",
-        "eslint-config-prettier": "^2.4.0",
-        "mocha": "^5.0.0",
+        "eslint": "^4.17.0",
+        "eslint-config-biddster": "^0.6.0",
+        "eslint-config-prettier": "^2.9.0",
+        "mocha": "^5.0.1",
+        "nyc": "^11.4.1",
         "prettier": "^1.7.0"
     },
     "eslintConfig": {
@@ -62,10 +65,7 @@
             "ecmaVersion": 6,
             "sourceType": "module"
         },
-        "extends": [
-            "eslint-config-biddster/es6-node",
-            "prettier"
-        ]
+        "extends": ["eslint-config-biddster/es6-node", "prettier"]
     },
     "prettier": {
         "singleQuote": true,
