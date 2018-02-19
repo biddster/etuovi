@@ -3,6 +3,7 @@ const headers = require(`security-headers`);
 const Promise = require('bluebird');
 const _ = require('lodash');
 const URI = require('urijs');
+const util = require('util');
 
 module.exports = {
     scan(host, config) {
@@ -24,9 +25,15 @@ module.exports = {
                 const warnings = _.keys(report.warnings);
                 return {
                     summary: [
-                        `[${path}] Score [${report.score}] found [${missingHeaders.length}] 
-                        missing headers [${missingHeaders}] and [${warnings.length}] 
-                        warnings [${warnings.join(',')}]`
+                        util.format(
+                            '[%s] Score [%s] found [%s] missing headers [%s] and [%d] warnings [%s]',
+                            path,
+                            report.score,
+                            missingHeaders.length,
+                            missingHeaders,
+                            warnings.length,
+                            warnings.join(',')
+                        )
                     ],
                     detail: report,
                     alert: config.expect ? config.expect === report.score : false
