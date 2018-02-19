@@ -11,9 +11,18 @@
                             "path": "/",
                             "method": "GET",
                             "expect": 200
-                        },
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "host": "facebook.com",
+            "scanners": {
+                "statuscodes": {
+                    "paths": [
                         {
-                            "path": "/groups",
+                            "path": "/",
                             "method": "GET",
                             "expect": 200
                         }
